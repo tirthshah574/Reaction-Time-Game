@@ -1,7 +1,7 @@
 const colors = ["blue", "green", "yellow", "red", "orange", "pink", "grey", "black", "indigo"];
 const title = document.getElementById("titleColor");
 const message = document.getElementById("message");
-const maxTurns = 3;
+const maxTurns = 5;
 const colorHeading = document.getElementById("colorH1");
 const container = document.getElementsByClassName("container")[0];
 let neededColor = randInt();
