@@ -14,8 +14,7 @@
     </h1>
 
     <div id="stripe">
-      <button onclick="reset(); main()">Start</button>
-      <button onclick="reset()">Reset</button>
+      <button id="button" onclick="toogleText()">Start</button>
     </div>
 
     <div class="container">
@@ -29,9 +28,15 @@
       <div id="7"></div>
       <div id="8"></div>
     </div>
-    <div id="stripe">
-      <span id="message"></span>
+    <div id="stripe"></div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="message"></p>
+      </div>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

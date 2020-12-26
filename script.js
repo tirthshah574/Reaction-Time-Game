@@ -4,10 +4,14 @@ const message = document.getElementById("message");
 const maxTurns = 5;
 const colorHeading = document.getElementById("colorH1");
 const container = document.getElementsByClassName("container")[0];
+const modal = document.getElementById("myModal");
+const span = document.getElementsByClassName("close")[0];
 let neededColor = randInt();
 let d = new Date();
 let mainCounter = 0;
 let score = 0;
+let start = false;
+
 function main() {
     neededColor = randInt();
     d = new Date();
@@ -33,6 +37,7 @@ function setListeners() {
                     resetColor();
                     showScore();
                     setTimeout(reset(), 3000);
+                    toogleText();
                 }
             } else {
                 // score += 1000;
@@ -43,11 +48,12 @@ function setListeners() {
 
 function startTimer() {
     resetColor();
-    let counter = 4;
+    let counter = 3;
     let div = document.getElementById('4');
+    div.innerText = counter;
     const a = setInterval(() => {
-        div.innerText = counter - 1;
         counter--;
+        div.innerText = counter;
         if (counter === 0) {
             clearTimeout(a);
             div.innerText = "";
@@ -75,7 +81,22 @@ function colorDivs() {
     }
 }
 
+function oneTimer() {
+    let counter = 3;
+    let div = document.getElementById('4');
+    div.innerText = counter;
+    const a = setInterval(() => {
+        counter--;
+        div.innerText = counter;
+        if (counter === 0) {
+            clearTimeout(a);
+            div.innerText = "";
+        };
+    }, 1000);
+}
+
 function resetColor() {
+    resetElements();
     let i, div;
     for (i = 0; i < 9; i++) {
         div = document.getElementById(String(i));
@@ -85,15 +106,42 @@ function resetColor() {
 }
 
 function showScore() {
+    modal.style.display = "block";
     message.innerText = `Average time is ${Math.floor(score / maxTurns)} milliseconds`;
 }
 
 function reset() {
     resetColor();
-    colorHeading.style.background = "linear-gradient(to right, #f64f59, #c471ed, #12c2e9)";
     mainCounter = 0;
     score = 0;
+}
+
+function resetElements() {
+    colorHeading.style.background = "linear-gradient(to right, #f64f59, #c471ed, #12c2e9)";
     title.innerText = "Color";
+}
+
+function toogleText() {
+    let button = document.getElementById("button");
+    if (!start) {
+        button.innerText = "reset";
+        oneTimer();
+        setTimeout(main, 3000);
+    } else {
+        button.innerText = "start";
+        reset();
+    }
+    start = !start;
+}
+
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
 
 function randInt() {
