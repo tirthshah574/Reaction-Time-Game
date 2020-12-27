@@ -6,6 +6,8 @@ const colorHeading = document.getElementById("colorH1");
 const container = document.getElementsByClassName("container")[0];
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
+const div = document.getElementById('4');
+let t, a;
 let neededColor = randInt();
 let d = new Date();
 let mainCounter = 0;
@@ -13,7 +15,6 @@ let score = 0;
 let start = false;
 
 function main() {
-    let button = document.getElementById("button");
     button.removeAttribute('disabled');
     neededColor = randInt();
     d = new Date();
@@ -51,13 +52,12 @@ function setListeners() {
 function startTimer() {
     resetColor();
     let counter = 3;
-    let div = document.getElementById('4');
     div.innerText = counter;
-    const a = setInterval(() => {
+    t = setInterval(() => {
         counter--;
         div.innerText = counter;
         if (counter === 0) {
-            clearTimeout(a);
+            clearTimeout(t);
             div.innerText = "";
             mainCounter++;
             if (mainCounter < maxTurns) {
@@ -85,13 +85,12 @@ function colorDivs() {
 
 function oneTimer() {
     let counter = 3;
-    let div = document.getElementById('4');
     div.innerText = counter;
-    const a = setInterval(() => {
+    t = setInterval(() => {
         counter--;
         div.innerText = counter;
         if (counter === 0) {
-            clearTimeout(a);
+            clearTimeout(t);
             div.innerText = "";
         };
     }, 1000);
@@ -114,6 +113,7 @@ function showScore() {
 
 function reset() {
     resetColor();
+    clearTimeout(t);
     mainCounter = 0;
     score = 0;
 }
@@ -121,20 +121,22 @@ function reset() {
 function resetElements() {
     colorHeading.style.background = "linear-gradient(to right, #f64f59, #c471ed, #12c2e9)";
     title.innerText = "Color";
+    div.innerText = "";
 }
 
 function toogleText() {
     let button = document.getElementById("button");
-    if (!start) {
+    start = !start;
+    if (start) {
         button.innerText = "reset";
         oneTimer();
-        button.disabled = true;
-        setTimeout(main, 3000);
+        a = setTimeout(main, 3000);
     } else {
+        console.log(a);
+        clearTimeout(a);
         button.innerText = "start";
         reset();
     }
-    start = !start;
 }
 function fixTouch() {
     let button = document.getElementById("button");
