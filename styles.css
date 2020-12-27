@@ -89,11 +89,7 @@ h1 {
   .center {
     font-size: 17vw;
   }
-  .modal {
-    width: 200vw;
-  }
   .modal-content {
-    width: 100vw;
     font-size: 3vw;
   }
 }

@@ -13,6 +13,8 @@ let score = 0;
 let start = false;
 
 function main() {
+    let button = document.getElementById("button");
+    button.removeAttribute('disabled');
     neededColor = randInt();
     d = new Date();
 
@@ -126,6 +128,7 @@ function toogleText() {
     if (!start) {
         button.innerText = "reset";
         oneTimer();
+        button.disabled = true;
         setTimeout(main, 3000);
     } else {
         button.innerText = "start";
@@ -133,7 +136,11 @@ function toogleText() {
     }
     start = !start;
 }
-
+function fixTouch() {
+    let button = document.getElementById("button");
+    button.style.background = "white";
+    button.style.color = "#12c2e9";
+}
 span.onclick = function () {
     modal.style.display = "none";
 }
