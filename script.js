@@ -15,7 +15,6 @@ let score = 0;
 let start = false;
 
 function main() {
-    button.removeAttribute('disabled');
     neededColor = randInt();
     d = new Date();
 
@@ -32,20 +31,22 @@ function setListeners() {
     let div;
     for (i = 0; i < 9; i++) {
         div = document.getElementById(String(i));
-        div.addEventListener("click", function () {
-            if (this.style.background === colors[neededColor]) {
-                score += new Date() - d;
-                if (mainCounter < maxTurns - 1) startTimer();
-                else {
-                    resetColor();
-                    showScore();
-                    setTimeout(reset(), 3000);
-                    toogleText();
-                }
-            } else {
-                // score += 1000;
-            }
-        });
+        div.addEventListener("click", onDivClick);
+    }
+}
+
+function onDivClick() {
+    if (this.style.background === colors[neededColor]) {
+        score += new Date() - d;
+        if (mainCounter < maxTurns - 1) startTimer();
+        else {
+            resetColor();
+            showScore();
+            setTimeout(reset(), 3000);
+            toogleText();
+        }
+    } else {
+        score += 1.
     }
 }
 
@@ -86,6 +87,7 @@ function colorDivs() {
 function oneTimer() {
     let counter = 3;
     div.innerText = counter;
+    container.style.pointerEvents = "none";
     t = setInterval(() => {
         counter--;
         div.innerText = counter;
@@ -132,7 +134,6 @@ function toogleText() {
         oneTimer();
         a = setTimeout(main, 3000);
     } else {
-        console.log(a);
         clearTimeout(a);
         button.innerText = "start";
         reset();
